@@ -1,0 +1,55 @@
+<!-- Same CSS classes as the original Contact Form 7 markup -->
+<div class="wpcf7">
+  <form class="wpcf7-form gem-contact-form-dark" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+    <div>
+      <p class="col-md-4">
+        <span class="wpcf7-form-control-wrap your-name">
+          <input class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" type="text" size="40"
+                 placeholder="Name*" formControlName="name" />
+          @if (invalid('name')) { <span class="wpcf7-not-valid-tip">The field is required.</span> }
+        </span>
+      </p>
+      <p class="col-md-4">
+        <span class="wpcf7-form-control-wrap your-email">
+          <input class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required" type="email" size="40"
+                 placeholder="Email*" formControlName="email" />
+          @if (invalid('email')) { <span class="wpcf7-not-valid-tip">Please enter a valid email.</span> }
+        </span>
+      </p>
+      <p class="col-md-4">
+        <span class="wpcf7-form-control-wrap your-website">
+          <input class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" type="text" size="40"
+                 placeholder="Website*" formControlName="website" />
+          @if (invalid('website')) { <span class="wpcf7-not-valid-tip">The field is required.</span> }
+        </span>
+      </p>
+      <p class="col-md-12">
+        <span class="wpcf7-form-control-wrap your-message">
+          <textarea class="wpcf7-form-control wpcf7-textarea wpcf7-validates-as-required" cols="40" rows="10"
+                    placeholder="Message*" formControlName="message"></textarea>
+          @if (invalid('message')) { <span class="wpcf7-not-valid-tip">The field is required.</span> }
+        </span>
+      </p>
+
+      <div class="gem-button-container gem-button-position-center">
+        <input
+          class="gem-button gem-button-size-medium gem-button-style-outline gem-button-text-weight-normal gem-button-border-2 wpcf7-form-control wpcf7-submit gem-button-wpcf-custom"
+          style="border-radius: 0px; border-color: #10d7e5; color: #10d7e5"
+          type="submit"
+          value="Submit Message"
+        />
+      </div>
+    </div>
+
+    <!-- Result message -->
+    <div
+      class="wpcf7-response-output"
+      [class.wpcf7-display-none]="status() === 'idle'"
+      [class.wpcf7-mail-sent-ok]="status() === 'sent'"
+      [class.wpcf7-validation-errors]="status() === 'error'"
+    >
+      @if (status() === 'sent') { Thank you for your message. It has been sent. }
+      @if (status() === 'error') { One or more fields have an error. Please check and try again. }
+    </div>
+  </form>
+</div>

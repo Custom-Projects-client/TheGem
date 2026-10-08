@@ -1,0 +1,13 @@
+<!-- Page frame (same ids/classes as the original theme) -->
+<div id="page" class="layout-fullwidth header-style-vertical">
+  <app-scroll-top />
+  <app-header />
+
+  <div id="main" class="site-main">
+    <!-- Current page is rendered here -->
+    <router-outlet />
+  </div>
+
+  <div id="lazy-loading-point"></div>
+  <app-footer />
+</div>

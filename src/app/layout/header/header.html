@@ -1,0 +1,123 @@
+<!-- Header: logo + hamburger + slide-in / overlay menu -->
+<div class="site-header-wrapper-transparent" id="site-header-wrapper">
+  <!-- Dark backdrops (click = close) -->
+  <div class="hamburger-overlay" [class.active]="open() && !mobile()" (click)="close()"></div>
+  <div class="menu-overlay" [class.active]="open() && mobile()" [class.mobile]="mobile()" (click)="close()"></div>
+
+  <header
+    id="site-header"
+    class="site-header animated-header mobile-menu-layout-overlay"
+    [class.fixed]="stuck()"
+    [class.shrink]="stuck()"
+    role="banner"
+  >
+    <div class="transparent-header-background">
+      <div class="container container-fullwidth">
+        <div class="header-main logo-position-left header-layout-fullwidth_hamburger header-style-vertical">
+          <!-- Logo: big one at top, small one when header sticks -->
+          <div class="site-title">
+            <div class="site-logo" style="width: 164px">
+              <a routerLink="/" rel="home">
+                <span class="logo">
+                  <img
+                    class="default"
+                    alt="Agency Dark"
+                    style="width: 164px"
+                    src="assets/uploads/thegem-logos/logo_1fc7b54240358eea09dada5644d991f2_1x.png"
+                    srcset="
+                      assets/uploads/thegem-logos/logo_1fc7b54240358eea09dada5644d991f2_1x.png 1x,
+                      assets/uploads/thegem-logos/logo_1fc7b54240358eea09dada5644d991f2_2x.png 2x,
+                      assets/uploads/thegem-logos/logo_1fc7b54240358eea09dada5644d991f2_3x.png 3x
+                    "
+                  />
+                  <img
+                    class="small"
+                    alt="Agency Dark"
+                    style="width: 132px"
+                    src="assets/uploads/thegem-logos/logo_d6f731f6ca1247ec8e47a9f6b6bd4744_1x.png"
+                    srcset="
+                      assets/uploads/thegem-logos/logo_d6f731f6ca1247ec8e47a9f6b6bd4744_1x.png 1x,
+                      assets/uploads/thegem-logos/logo_d6f731f6ca1247ec8e47a9f6b6bd4744_2x.png 2x,
+                      assets/uploads/thegem-logos/logo_d6f731f6ca1247ec8e47a9f6b6bd4744_3x.png 3x
+                    "
+                  />
+                </span>
+              </a>
+            </div>
+          </div>
+
+          <nav
+            class="site-navigation primary-navigation"
+            id="primary-navigation"
+            role="navigation"
+            [class.responsive]="mobile()"
+            [class.hamburger-active]="open() && !mobile()"
+            [class.overlay-active]="open() && mobile()"
+          >
+            <!-- Hamburger button: mobile one + desktop one (CSS shows the right one) -->
+            <button class="menu-toggle dl-trigger" (click)="toggle()">
+              Primary Menu<span class="menu-line-1"></span><span class="menu-line-2"></span><span class="menu-line-3"></span>
+            </button>
+            <div class="hamburger-group">
+              <button class="hamburger-toggle" (click)="toggle()">
+                Primary Menu<span class="menu-line-1"></span><span class="menu-line-2"></span><span class="menu-line-3"></span>
+              </button>
+            </div>
+
+            <div class="overlay-menu-wrapper" [class.active]="open() && mobile()">
+              <div class="overlay-menu-table">
+                <div class="overlay-menu-row">
+                  <div class="overlay-menu-cell">
+                    <!-- Menu items come from core/site-data.ts -->
+                    <ul class="nav-menu styled" [class.no-responsive]="!mobile()" id="primary-menu">
+                      @for (item of menu; track item.label) {
+                        <li
+                          class="menu-item megamenu-first-element"
+                          [class.menu-item-has-children]="item.children"
+                          [class.menu-item-parent]="item.children"
+                          [class.menu-item-current]="isExact(item.link)"
+                          [class.menu-item-active]="isActive(item)"
+                          [class.menu-overlay-item-open]="openItem() === item.label"
+                        >
+                          <!-- routerLink = null on mobile parents, so a tap only opens the sub-menu -->
+                          <a
+                            [routerLink]="item.children && mobile() ? null : item.link"
+                            (click)="onParentClick(item)"
+                            >{{ item.label }}</a
+                          >
+                          @if (item.children) {
+                            <span class="menu-item-parent-toggle" (click)="onParentClick(item)"></span>
+                            <ul class="sub-menu styled">
+                              @for (child of item.children; track child.label) {
+                                <li class="menu-item megamenu-first-element" [class.menu-item-current]="isExact(child.link)">
+                                  <a [routerLink]="child.link" (click)="close()">{{ child.label }}</a>
+                                </li>
+                              }
+                            </ul>
+                          }
+                        </li>
+                      }
+
+                      <!-- Social icons (list in core/site-data.ts) -->
+                      <li class="menu-item menu-item-widgets">
+                        <div class="menu-item-socials socials-colored">
+                          <div class="socials inline-inside">
+                            @for (s of socials; track s.name) {
+                              <a class="socials-item" [href]="s.url" target="_blank" rel="noopener" [title]="s.name">
+                                <i class="socials-item-icon social-item-rounded" [class]="'socials-item-icon social-item-rounded ' + s.icon"></i>
+                              </a>
+                            }
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+</div>

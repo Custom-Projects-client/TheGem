@@ -1,0 +1,37 @@
+/* =====================================================
+   YOUR GLOBAL CSS  (loaded after theme.css, so it wins)
+   - Put colour / font / spacing tweaks here.
+   ===================================================== */
+
+/* --- 1. Angular wrapper tags must not change layout --- */
+app-root { display: block; }
+app-header, app-footer, app-scroll-top, #main > * { display: contents; }
+app-contact-form { display: block; }
+
+/* --- 2. No sideways scroll from full-width sections --- */
+body { overflow-x: hidden; }
+
+/* --- 3. Hero video fills its box --- */
+.gem-video-background-inner video { object-fit: cover; }
+
+/* --- 4. Contact form button hover (was inline JS) --- */
+.gem-button-wpcf-custom:hover {
+  background-color: #10d7e5 !important;
+  color: #212331 !important;
+}
+
+/* --- 5. Image lightbox (gallery pages) --- */
+.lightbox {
+  position: fixed; inset: 0; z-index: 99999;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(10, 11, 20, 0.92);
+}
+.lightbox img { max-width: 92vw; max-height: 88vh; box-shadow: 0 0 40px rgba(0, 0, 0, 0.6); }
+.lightbox button {
+  position: absolute; background: none; border: 0; color: #fff;
+  font-size: 40px; line-height: 1; cursor: pointer; padding: 16px; opacity: 0.8;
+}
+.lightbox button:hover { opacity: 1; }
+.lightbox .lb-close { top: 8px; right: 12px; }
+.lightbox .lb-prev { left: 8px; top: 50%; transform: translateY(-50%); }
+.lightbox .lb-next { right: 8px; top: 50%; transform: translateY(-50%); }
